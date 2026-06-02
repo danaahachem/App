@@ -885,15 +885,15 @@ function speak(text) {
   u.pitch = 1.1;
   u.volume = 0.9;
   // prefer female voice
-  const voices = window.speechSynthesis.getVoices();
-  const fem = voices.find(v =>
-    v.name.toLowerCase().includes('samantha') ||
-    v.name.toLowerCase().includes('victoria') ||
-    v.name.toLowerCase().includes('karen') ||
-    v.name.toLowerCase().includes('female') ||
-    (v.lang.startsWith('en') && v.name.toLowerCase().includes('google us english'))
-  );
-  if (fem) u.voice = fem;
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+
+  const u = new SpeechSynthesisUtterance(text);
+  u.rate = 0.88;
+  u.pitch = 1.1;
+  u.volume = 0.9;
+
   window.speechSynthesis.speak(u);
 }
 
